@@ -4,7 +4,7 @@
 </head>
 <body>
 <noscript>ต้องเปิด JavaScript เพื่อใช้งานหน้านี้</noscript>
-<div id="loader" style="padding:60px 16px;text-align:center;font:14pt Tahoma,sans-serif;color:#666">กำลังโหลด…</div>
+<div id="loader" style="display:none"></div>
 <!-- Credit: 1 ไฟล์ มี 4 หน้า (chooser = หน้าเลือกประเภทลูกค้า, new = ลูกค้าใหม่, old = ลูกค้าเก่า, manual = คู่มือ)
      แก้หน้าไหน ให้แก้ในบล็อก <script id="pg-ชื่อหน้า"> ของหน้านั้น; ใน HTML ที่ฝังไว้ "</script" และ "<!--" ถูกแทนด้วย ⟦ -->
 <!-- ===== หน้า chooser ===== -->
@@ -13269,6 +13269,7 @@ document.addEventListener('DOMContentLoaded', init);
   if(KEYS.indexOf(v)<0) v='chooser';
   var html=document.getElementById('pg-'+v).textContent
     .replace(/\u27e6\/(script)/gi,'</$1').replace(/\u27e6!--/g,'<!--');
+  var l=document.getElementById('loader'); if(l&&l.parentNode) l.parentNode.removeChild(l);
   document.open(); document.write(html); document.close();
 })();
 </script>

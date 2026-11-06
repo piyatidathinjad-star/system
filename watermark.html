@@ -3255,5 +3255,18 @@ window.WM_FONTS_B64 = {
 })(window);
 
 </script>
+
+<!-- ฟอนต์สำหรับแสดงบนหน้าจอ: ไฟล์เดียวไม่มีโฟลเดอร์ fonts/ จึงสร้างฟอนต์จากข้อมูลที่ฝังไว้ในไฟล์ (เพิ่มภายหลัง ไม่แก้โค้ดเดิม) -->
+<script>
+window.addEventListener('load',function(){try{
+  var L=(window.WM&&WM.Fonts&&WM.Fonts.list)||[], B=window.WM_FONTS_B64||{}, css='';
+  function url(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:'font/ttf'}));}
+  L.forEach(function(f){
+    if(B[f.regularKey]) css+="@font-face{font-family:'"+f.cssFamily+"';src:url('"+url(B[f.regularKey])+"') format('truetype');font-weight:400;font-style:normal;font-display:swap;}\n";
+    if(B[f.boldKey]) css+="@font-face{font-family:'"+f.cssFamily+"';src:url('"+url(B[f.boldKey])+"') format('truetype');font-weight:700;font-style:normal;font-display:swap;}\n";
+  });
+  var st=document.createElement('style'); st.id='ds-font-shim'; st.textContent=css; document.head.appendChild(st);
+}catch(e){}});
+</script>
 </body>
 </html>
